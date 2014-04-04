@@ -54,18 +54,55 @@ function SunstangUI_OpeningFcn(hObject, eventdata, handles, varargin)
 
 %%assign the battery-current plot to the one being displayed
 %axes(handles.battery_current);
-y_array = [];
+a = [];
+b = [];
+c = [];
+d = [];
+e = [];
+f = [];
+g = [];
+h = [];
+i = [];
+
 
 %y_array = zeros(1,100000);
 
 %%generate random y values
 for i = 1:100
     r1 = times(rand,5);
-    y_array(end + 1) = r1;
+    r2 = times(rand,5);
+    r3 = times(rand,5);
+    r4 = times(rand,5);
+    r5 = times(rand,5);
+    r6 = times(rand,5);
+    r7 = times(rand,5);
+    r8 = times(rand,5);
+    
+    a(end + 1) = r1;
+    b(end + 1) = r2;
+    c(end + 1) = r3;
+    d(end + 1) = r4;
+    e(end + 1) = r5;
+    f(end + 1) = r6
+    g(end + 1) = r7;
+    h(end + 1) = r8;
+    %a(end + 1) = r1;
+    %a(end + 1) = r1;
+
     drawnow;
 end
-x = 4;
-updateBatteryVoltage(y_array, hObject, handles);
+
+
+updateBatteryVoltage(a, handles);
+updateBatteryCurrent(b, handles);
+updateBatteryTemperature(c, handles);
+updateSolarArrayCurrent(d, handles);
+updateSolarArrayVoltage(e, handles);
+updateMotorSpeed(f, handles);
+updateMotorTemperature(g, handles);
+updateCabinTemperature(h, handles);
+
+
 
 % Choose default command line output for SunstangUI
 handles.output = hObject;
@@ -90,13 +127,38 @@ varargout{1} = handles.output;
 
 
 
-function [] = updateBatteryVoltage(an_array, hObject,handles) 
+function [] = updateBatteryVoltage(most_updated_plot_points, handles) 
+    axes(handles.battery_voltage);
+    plot(most_updated_plot_points, '-.dk','linewidth',1.5); 
+
+function [] = updateBatteryCurrent(most_updated_plot_points, handles) 
     axes(handles.battery_current);
-    plot(an_array, '-.dk','linewidth',1.5); 
+    plot(most_updated_plot_points, '-.dk','linewidth',1.5); 
+    
+function [] = updateBatteryTemperature(most_updated_plot_points, handles) 
+    axes(handles.battery_temperature);
+    plot(most_updated_plot_points, '-.dk','linewidth',1.5); 
 
-% Choose default command line output for SunstangUI
-    handles.output = hObject;
+function [] = updateSolarArrayCurrent(most_updated_plot_points, handles) 
+    axes(handles.solar_array_current);
+    plot(most_updated_plot_points, '-.dk','linewidth',1.5); 
 
-% Update handles structure
-    guidata(hObject, handles);
+function [] = updateSolarArrayVoltage(most_updated_plot_points, handles) 
+    axes(handles.solar_array_voltage);
+    plot(most_updated_plot_points, '-.dk','linewidth',1.5); 
+    
+function [] = updateMotorSpeed(most_updated_plot_points, handles) 
+    axes(handles.motor_speed);
+    plot(most_updated_plot_points, '-.dk','linewidth',1.5); 
+    
+function [] = updateMotorTemperature(most_updated_plot_points, handles) 
+    axes(handles.motor_temperature);
+    plot(most_updated_plot_points, '-.dk','linewidth',1.5); 
+    
+function [] = updateCabinTemperature(most_updated_plot_points, handles) 
+    axes(handles.cabin_temperature);
+    plot(most_updated_plot_points, '-.dk','linewidth',1.5); 
+
+
+
 
