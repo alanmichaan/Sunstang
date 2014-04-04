@@ -52,43 +52,20 @@ function SunstangUI_OpeningFcn(hObject, eventdata, handles, varargin)
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to SunstangUI (see VARARGIN)
 
-
-%handles.peaks = peaks(35);
-%handles.membrane = membrane;
-%[x, y] = meshgrid(-8:0.5:8);
-%r = sqrt(x.^3 + y.^3);
-%sinc = sin(r)./r;
-%handles.sinc = sinc;
-%handles.current_data = handles.peaks;
-
-%disp(r1)
-axes(handles.battery_current);
-x = [0:1:10];
+%%assign the battery-current plot to the one being displayed
+%axes(handles.battery_current);
 y_array = [];
-%%x_array = [];
-%plot(x,r1);
-%hLine = plot(nan); 
 
+%y_array = zeros(1,100000);
+
+%%generate random y values
 for i = 1:100
     r1 = times(rand,5);
-    disp(r1);
-    %set(hLine,'ydata',r1)
-    %plot(r1,), axis([1 20 0 1])
     y_array(end + 1) = r1;
-    plot(x,r1, '-.dk','linewidth',1.8); 
     drawnow;
-    %refreshdata
-    %drawnow
 end
-
-
-plot(y_array, '-.dk','linewidth',1.8); 
-    
-    
-    
-
-
-disp(array);
+x = 4;
+updateBatteryVoltage(y_array, hObject, handles);
 
 % Choose default command line output for SunstangUI
 handles.output = hObject;
@@ -109,3 +86,17 @@ function varargout = SunstangUI_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
+
+
+
+
+function [] = updateBatteryVoltage(an_array, hObject,handles) 
+    axes(handles.battery_current);
+    plot(an_array, '-.dk','linewidth',1.5); 
+
+% Choose default command line output for SunstangUI
+    handles.output = hObject;
+
+% Update handles structure
+    guidata(hObject, handles);
+
