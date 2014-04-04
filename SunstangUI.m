@@ -64,7 +64,8 @@ function SunstangUI_OpeningFcn(hObject, eventdata, handles, varargin)
 %disp(r1)
 axes(handles.battery_current);
 x = [0:1:10];
-array = [];
+y_array = [];
+%%x_array = [];
 %plot(x,r1);
 %hLine = plot(nan); 
 
@@ -73,13 +74,19 @@ for i = 1:100
     disp(r1);
     %set(hLine,'ydata',r1)
     %plot(r1,), axis([1 20 0 1])
-    array(end + 1) = r1;
-    plot(x,r1, '-.dk','linewidth',1.8);
+    y_array(end + 1) = r1;
+    plot(x,r1, '-.dk','linewidth',1.8); 
     drawnow;
-
     %refreshdata
     %drawnow
 end
+
+
+plot(y_array, '-.dk','linewidth',1.8); 
+    
+    
+    
+
 
 disp(array);
 
